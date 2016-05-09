@@ -42,53 +42,69 @@ window.Heatmap = (function() {
                 // .attr('height', this.chartHeight)
                 // .attr('width', this.chartWidth);
 
-            var xLabels = chartG.append('g')
-                .data(this.xDataLabels)
-                .enter().append('text')
-                .attr("x", function(d, i) { return i * this.gridSize; })
-                .attr("y", 0)
-                .attr("transform", "translate(" + this.gridSize / 2 + ", -6)")
-                .text(function(d) { return d; })
-                .style("text-anchor", "middle")
-                .attr("class", function(d, i) { return ((i >= 7 && i <= 16) ? "timeLabel mono axis axis-worktime" : "timeLabel mono axis"); });
+            var yScale = d3.scale.ordinal()
+                .domain(['1', '2', '3', '4', '5', '6', '7'])
+                .rangeBands([0, this.chartWidth]);
 
-            var yLabels = chartG.append('g')
-                .data(this.yDataLabels)
-                .enter().append('text')
-                .text(function(d) { return d; })
-                .style('text-anchor', 'middle')
-                .attr('transform', "translate(-6," + this.gridSize / 1.5 + ")")
-                .attr('x', 0)
-                .attr('y', function (d, i) { return i * this.gridSize; })
-                .attr('class', function (d, i) { return ((i >= 0 && i <= 4) ? 'dayLabel mono axis axis-workweek' : 'dayLabel mono axis'); });
+            d3.tsv('data.tsv', function(error, data) {
+                var rect = chartG.data(data)
+                    .enter()
+                    .append('rect')
+                    .attr('y', function(d) { return yScale(d.day) })
+                    .attr('height', 50)
+                    .attr('width', 50)
+                    .style('fill', this.colors[6])
 
-            var heatmapChart = function(file) {
-                d3.tsv(file,
-                function(d) {
-                    return {
-                        day: +d.day,
-                        hour: +d.hour,
-                        value: +d.value
-                    };
-                },
-                function(error, data) {
-                    var colorScale = d3.scale.quantile()
-                        .doamin([0, heatmap.colors.length - 1, d3.max(data, function(d) {return d.value;})])
-                        .range(heatmap.colors);
 
-                    var cards = heatmap.chartG.append('rect')
-                        .attr("x", function(d) { return (d.hour - 1) * heatmap.gridSize; })
-                        .attr("y", function(d) { return (d.day - 1) * heatmap.gridSize; })
-                        .attr("rx", 4)
-                        .attr("ry", 4)
-                        .attr("class", "hour bordered")
-                        .attr("width", heatmap.gridSize)
-                        .attr("height", heatmap.gridSize)
-                        .style("fill", heatmap.colors[0]);
-                })
-            }
+            })
 
-            heatmapChart('data.tsv')
+            // var xLabels = chartG.append('g')
+            //     .data(this.xDataLabels)
+            //     .enter().append('text')
+            //     .attr("x", function(d, i) { return i * this.gridSize; })
+            //     .attr("y", 0)
+            //     .attr("transform", "translate(" + this.gridSize / 2 + ", -6)")
+            //     .text(function(d) { return d; })
+            //     .style("text-anchor", "middle")
+            //     .attr("class", function(d, i) { return ((i >= 7 && i <= 16) ? "timeLabel mono axis axis-worktime" : "timeLabel mono axis"); });
+            //
+            // var yLabels = chartG.append('g')
+            //     .data(this.yDataLabels)
+            //     .enter().append('text')
+            //     .text(function(d) { return d; })
+            //     .style('text-anchor', 'middle')
+            //     .attr('transform', "translate(-6," + this.gridSize / 1.5 + ")")
+            //     .attr('x', 0)
+            //     .attr('y', function (d, i) { return i * this.gridSize; })
+            //     .attr('class', function (d, i) { return ((i >= 0 && i <= 4) ? 'dayLabel mono axis axis-workweek' : 'dayLabel mono axis'); });
+
+            // var heatmapChart = function(file) {
+            //     d3.tsv(file,
+            //     function(d) {
+            //         return {
+            //             day: +d.day,
+            //             hour: +d.hour,
+            //             value: +d.value
+            //         };
+            //     },
+            //     function(error, data) {
+            //         var colorScale = d3.scale.quantile()
+            //             .domain([0, heatmap.colors.length - 1, d3.max(data, function(d) {return d.value;})])
+            //             .range(heatmap.colors);
+            //
+            //         var cards = heatmap.chartG.append('rect')
+            //             .attr("x", function(d) { return (d.hour - 1) * heatmap.gridSize; })
+            //             .attr("y", function(d) { return (d.day - 1) * heatmap.gridSize; })
+            //             .attr("rx", 4)
+            //             .attr("ry", 4)
+            //             .attr("class", "hour bordered")
+            //             .attr("width", heatmap.gridSize)
+            //             .attr("height", heatmap.gridSize)
+            //             .style("fill", heatmap.colors[0]);
+            //     })
+            // }
+            //
+            // heatmapChart('data.tsv')
 
             return this;
         }

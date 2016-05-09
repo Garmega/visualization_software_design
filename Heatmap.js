@@ -67,7 +67,7 @@ window.Heatmap = (function() {
                     .attr('x', function(d) { return xScale(d.hour) })
                     .attr('height', 50)
                     .attr('width', 50)
-                    .style("fill", this.colors[0]);
+                    .style("fill", heatmap.colors[0]);
 
                 rects.transition().duration(1000)
                     .style("fill", function(d) { return colorScale(d.value); });

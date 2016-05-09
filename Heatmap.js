@@ -51,8 +51,6 @@ window.Heatmap = (function() {
                 .rangeBands([0, this.chartWidth])
 
 
-
-
             d3.tsv('data.tsv', function(error, data) {
                 var colorScale = d3.scale.quantile()
                     .domain([0, heatmap.colors.length - 1, d3.max(data, function(d) {return d.value;})])
@@ -65,12 +63,12 @@ window.Heatmap = (function() {
 
                 rects.attr('y', function(d) { return yScale(d.day) })
                     .attr('x', function(d) { return xScale(d.hour) })
-                    .attr('height', 50)
-                    .attr('width', 50)
-                    .style("fill", heatmap.colors[0]);
+                    .attr('height', this.gridSize)
+                    .attr('width', this.gridSize)
+                    .style('fill', heatmap.colors[0]);
 
                 rects.transition().duration(1000)
-                    .style("fill", function(d) { return colorScale(d.value); });
+                    .style('fill', function(d) { return colorScale(d.value); });
             })
 
             // var xLabels = chartG.append('g')

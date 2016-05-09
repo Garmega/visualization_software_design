@@ -49,7 +49,7 @@ window.Heatmap = (function() {
 
 
             d3.tsv('data.tsv', function(error, data) {
-                var rects = charG.selectAll('.rect')
+                var rects = chartG.selectAll('.rect')
                     .data(data)
 
                 rects.enter().append('rect')

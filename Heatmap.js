@@ -63,8 +63,8 @@ window.Heatmap = (function() {
 
                 rects.attr('y', function(d) { return yScale(d.day) })
                     .attr('x', function(d) { return xScale(d.hour) })
-                    .attr('height', this.gridSize)
-                    .attr('width', this.gridSize)
+                    .attr('height', heatmap.gridSize)
+                    .attr('width', heatmap.gridSize)
                     .style("fill", heatmap.colors[0]);
 
                 rects.transition().duration(1000)

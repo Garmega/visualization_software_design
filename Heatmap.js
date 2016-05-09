@@ -51,7 +51,13 @@ window.Heatmap = (function() {
                 .rangeBands([0, this.chartWidth])
 
 
+
+
             d3.tsv('data.tsv', function(error, data) {
+                var colorScale = d3.scale.quantile()
+                    .domain([0, this.colors.length - 1, d3.max(data, function(d) {return d.value;})])
+                    .range(this.colors);
+                    
                 var rects = chartG.selectAll('.rect')
                     .data(data)
 
@@ -61,10 +67,10 @@ window.Heatmap = (function() {
                     .attr('x', function(d) { return xScale(d.hour) })
                     .attr('height', 50)
                     .attr('width', 50)
-                    .style('fill', "#225ea8")
+                    .style("fill", this.colors[0]);
 
-
-
+                rects.transition().duration(1000)
+                    .style("fill", function(d) { return colorScale(d.value); });
             })
 
             // var xLabels = chartG.append('g')
@@ -97,9 +103,9 @@ window.Heatmap = (function() {
             //         };
             //     },
             //     function(error, data) {
-            //         var colorScale = d3.scale.quantile()
-            //             .domain([0, heatmap.colors.length - 1, d3.max(data, function(d) {return d.value;})])
-            //             .range(heatmap.colors);
+                    // var colorScale = d3.scale.quantile()
+                    //     .domain([0, heatmap.colors.length - 1, d3.max(data, function(d) {return d.value;})])
+                    //     .range(heatmap.colors);
             //
             //         var cards = heatmap.chartG.append('rect')
             //             .attr("x", function(d) { return (d.hour - 1) * heatmap.gridSize; })

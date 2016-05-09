@@ -53,7 +53,7 @@ window.Heatmap = (function() {
                     .attr('y', function(d) { return yScale(d.day) })
                     .attr('height', 50)
                     .attr('width', 50)
-                    .style('fill', this.colors[6])
+                    .style('fill', "#225ea8")
 
 
             })

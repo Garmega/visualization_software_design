@@ -27,9 +27,9 @@ window.Heatmap = (function() {
 
         heatmap.build = function() {
             this.finalCalculations();
+            console.log(this.gridSize);
 
             //Creates canvas and size accordingly
-            console.log(this.chartIdentifier);
             // var canvasSvg = d3.selectAll(this.chartIdentifier)
             var canvasSvg = d3.selectAll('#container')
                 .append('svg')
@@ -65,10 +65,10 @@ window.Heatmap = (function() {
                     .attr('x', function(d) { return xScale(d.hour) })
                     .attr('height', this.gridSize)
                     .attr('width', this.gridSize)
-                    .style('fill', heatmap.colors[0]);
+                    .style("fill", heatmap.colors[0]);
 
                 rects.transition().duration(1000)
-                    .style('fill', function(d) { return colorScale(d.value); });
+                    .style("fill", function(d) { return colorScale(d.value); });
             })
 
             // var xLabels = chartG.append('g')

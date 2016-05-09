@@ -55,9 +55,9 @@ window.Heatmap = (function() {
 
             d3.tsv('data.tsv', function(error, data) {
                 var colorScale = d3.scale.quantile()
-                    .domain([0, this.colors.length - 1, d3.max(data, function(d) {return d.value;})])
-                    .range(this.colors);
-                    
+                    .domain([0, heatmap.colors.length - 1, d3.max(data, function(d) {return d.value;})])
+                    .range(heatmap.colors);
+
                 var rects = chartG.selectAll('.rect')
                     .data(data)
 

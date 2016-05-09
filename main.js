@@ -11,7 +11,7 @@ function main() {
 
     heatmap.setIdentifier('container')
         .setMargins(50, 50, 50, 50)
-        .setDimensions(500, 1000)
+        .setDimensions(500, 1200)
         .build();
 
     console.log(heatmap);

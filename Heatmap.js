@@ -65,6 +65,7 @@ window.Heatmap = (function() {
                     .attr('x', function(d) { return xScale(d.hour) })
                     .attr('height', heatmap.gridSize)
                     .attr('width', heatmap.gridSize)
+                    .attr("class", "hour bordered")
                     .style("fill", heatmap.colors[0]);
 
                 rects.transition().duration(1000)

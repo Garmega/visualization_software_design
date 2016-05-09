@@ -44,7 +44,7 @@ window.Heatmap = (function() {
 
             var yScale = d3.scale.ordinal()
                 .domain(['1', '2', '3', '4', '5', '6', '7'])
-                .rangeBands([0, this.chartWidth]);
+                .rangeBands([0, this.chartHeight]);
 
 
 

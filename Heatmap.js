@@ -46,14 +46,20 @@ window.Heatmap = (function() {
                 .domain(['1', '2', '3', '4', '5', '6', '7'])
                 .rangeBands([0, this.chartWidth]);
 
+
+
             d3.tsv('data.tsv', function(error, data) {
-                var rect = chartG.data(data)
-                    .enter()
-                    .append('rect')
-                    .attr('y', function(d) { return yScale(d.day) })
+                var rects = charG.selectAll('.rect')
+                    .data(data)
+
+                rects.enter().append('rect')
+
+                rects.attr('y', function(d) { return yScale(d.day) })
+                    .attr('x', 50)
                     .attr('height', 50)
                     .attr('width', 50)
                     .style('fill', "#225ea8")
+
 
 
             })

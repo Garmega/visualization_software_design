@@ -6,8 +6,8 @@ window.Heatmap = (function() {
         /*
         user defined data
         */
-        heatmap.xDataLabels = ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"];
-        heatmap.yDataLabels = ["1a", "2a", "3a", "4a", "5a", "6a", "7a", "8a", "9a", "10a", "11a", "12a", "1p", "2p", "3p", "4p", "5p", "6p", "7p", "8p", "9p", "10p", "11p", "12p"];
+        heatmap.yDataLabels = ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"];
+        heatmap.xDataLabels = ["1a", "2a", "3a", "4a", "5a", "6a", "7a", "8a", "9a", "10a", "11a", "12a", "1p", "2p", "3p", "4p", "5p", "6p", "7p", "8p", "9p", "10p", "11p", "12p"];
         heatmap.colors = ["#ffffd9","#edf8b1","#c7e9b4","#7fcdbb","#41b6c4","#1d91c0","#225ea8","#253494","#081d58"];
 
         /*
@@ -46,6 +46,9 @@ window.Heatmap = (function() {
                 .domain(['1', '2', '3', '4', '5', '6', '7'])
                 .rangeBands([0, this.chartHeight]);
 
+            var xScale = d3.scale.ordinal()
+                .domain(['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24'])
+                .rangeBands([0, this.chartWidth])
 
 
             d3.tsv('data.tsv', function(error, data) {
@@ -55,7 +58,7 @@ window.Heatmap = (function() {
                 rects.enter().append('rect')
 
                 rects.attr('y', function(d) { return yScale(d.day) })
-                    .attr('x', 50)
+                    .attr('x', function(d) { return xScale(d.hour) })
                     .attr('height', 50)
                     .attr('width', 50)
                     .style('fill', "#225ea8")

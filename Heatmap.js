@@ -61,8 +61,8 @@ window.Heatmap = (function() {
 
                 rects.enter().append('rect')
 
-                rects.attr('y', function(d) { return (d.hour - 1) * heatmap.gridSize; })
-                    .attr('x', function(d) { return (d.day - 1) * heatmap.gridSize; })
+                rects.attr('y', function(d) { return (d.day - 1) * heatmap.gridSize; })
+                    .attr('x', function(d) { return (d.hour - 1) * heatmap.gridSize; })
                     .attr("rx", 4)
                     .attr("ry", 4)
                     .attr('height', heatmap.gridSize)

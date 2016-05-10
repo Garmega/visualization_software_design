@@ -39,8 +39,8 @@ window.Heatmap = (function() {
             //Creates chart and moves it accordingly
             var chartG = canvasSvg.append('g')
                 .attr('transform', 'translate(' + this.margin.left + ',' + this.margin.top + ')')
-                // .attr('height', this.chartHeight)
-                // .attr('width', this.chartWidth);
+                .attr('height', this.chartHeight)
+                .attr('width', this.chartWidth);
 
             // var yScale = d3.scale.ordinal()
             //     .domain(['1', '2', '3', '4', '5', '6', '7'])

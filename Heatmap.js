@@ -42,13 +42,13 @@ window.Heatmap = (function() {
                 // .attr('height', this.chartHeight)
                 // .attr('width', this.chartWidth);
 
-            var yScale = d3.scale.ordinal()
-                .domain(['1', '2', '3', '4', '5', '6', '7'])
-                .rangeBands([0, this.chartHeight]);
-
-            var xScale = d3.scale.ordinal()
-                .domain(['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24'])
-                .rangeBands([0, this.chartWidth])
+            // var yScale = d3.scale.ordinal()
+            //     .domain(['1', '2', '3', '4', '5', '6', '7'])
+            //     .rangeBands([0, this.chartHeight]);
+            //
+            // var xScale = d3.scale.ordinal()
+            //     .domain(['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24'])
+            //     .rangeBands([0, this.chartWidth])
 
 
             d3.tsv('data.tsv', function(error, data) {
@@ -61,8 +61,8 @@ window.Heatmap = (function() {
 
                 rects.enter().append('rect')
 
-                rects.attr('y', function(d) { return yScale(d.day) })
-                    .attr('x', function(d) { return xScale(d.hour) })
+                rects.attr('y', function(d) { return (d.hour - 1) * gridSize; })
+                    .attr('x', function(d) { return (d.day - 1) * gridSize; })
                     .attr("rx", 4)
                     .attr("ry", 4)
                     .attr('height', heatmap.gridSize)

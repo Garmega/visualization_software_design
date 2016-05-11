@@ -33,7 +33,7 @@ window.Heatmap = (function() {
             //Creates canvas and size accordingly
             console.log(heatmap.chartIdentifier);
             var canvasSvg = d3.selectAll(heatmap.chartIdentifier)
-            var canvasSvg = d3.selectAll('#container')
+            //var canvasSvg = d3.selectAll('#container')
                 .append('svg')
                 .attr('height', heatmap.canvasHeight)
                 .attr('width', heatmap.canvasWidth);

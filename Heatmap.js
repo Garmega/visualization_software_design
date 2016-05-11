@@ -106,7 +106,7 @@ window.Heatmap = (function() {
                     .style("fill", function(d) { return colorScale(d.value); });
 
                 var legend = canvasSvg.selectAll(".legend")
-                    .data([0].concat(heatmap.colorScale.quantiles()), function(d) { return d; });
+                    .data([0].concat(colorScale.quantiles()), function(d) { return d; });
 
                 legend.enter().append("g")
                     .attr("class", "legend");

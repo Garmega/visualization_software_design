@@ -9,15 +9,16 @@ window.Heatmap = (function() {
         /*
         User defined dimensions
         */
-        heatmap.margin {
+        heatmap.margin = {
             left: 50,
             bottom: 50,
             top: 50,
             right: 50
-        }
+        };
+        
         heatmap.defaultColor = "#ffffff";
         heatmap.colors = ["#ffffd9","#edf8b1","#c7e9b4","#7fcdbb","#41b6c4","#1d91c0","#225ea8","#253494","#081d58"];
-        
+
         heatmap.yDataLabels;
         heatmap.xDataLabels;
         heatmap.fileName;

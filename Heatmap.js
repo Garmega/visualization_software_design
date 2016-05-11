@@ -105,6 +105,22 @@ window.Heatmap = (function() {
                     .delay(function(d) { return d.day * 100 } )
                     .style("fill", function(d) { return colorScale(d.value); });
 
+                legend.enter().append("g")
+                    .attr("class", "legend");
+
+                legend.append("rect")
+                  .attr("x", function(d, i) { return heatmap.gridSize * i; })
+                  .attr("y", heatmap.canvasHeight + heatmap.margin.top)
+                  .attr("width", heatmap.gridSize * 2)
+                  .attr("height", heatmap.gridSize / 2)
+                  .style("fill", function(d, i) { return colors[i]; });
+
+                legend.append("text")
+                  .attr("class", "mono")
+                  .text(function(d) { return "≥ " + Math.round(d); })
+                  .attr("x", function(d, i) { return heatmap.gridSize * i; })
+                  .attr("y", heatmap.canvasHeight + heatmap.margin.top + 5);
+
             })
 
             return this;

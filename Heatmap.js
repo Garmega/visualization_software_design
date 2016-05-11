@@ -95,7 +95,7 @@ window.Heatmap = (function() {
                     .attr('height', heatmap.gridSize)
                     .attr('width', heatmap.gridSize)
                     .attr("class", "bordered")
-                    .style("fill", heatmap.defaultColor);
+                    .style("fill", heatmap.defaultColor)
                     .style("stroke", "#E6E6E6")
                     .style("stroke-width", "2px");
 

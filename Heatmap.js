@@ -14,6 +14,7 @@ window.Heatmap = (function() {
         /*
         User defined dimensions
         */
+        heatmap.fileName;
         heatmap.canvasIdentifier;
         heatmap.margin;
         heatmap.canvasHeight;
@@ -64,7 +65,7 @@ window.Heatmap = (function() {
                   .attr("class", "timeLabel mono axis");
 
 
-            d3.tsv('data.tsv', function(error, data) {
+            d3.tsv(heatmap.fileName, function(error, data) {
                 var colorScale = d3.scale.quantile()
                     .domain([0, heatmap.colors.length - 1, d3.max(data, function(d) {return +d.value;})])
                     .range(heatmap.colors);
@@ -89,6 +90,11 @@ window.Heatmap = (function() {
 
             })
 
+            return this;
+        }
+
+        heatmap.setFileName = function(fileName) {
+            this.fileName = fileName;
             return this;
         }
 

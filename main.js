@@ -10,6 +10,7 @@ function main() {
     var heatmap = Heatmap();
 
     heatmap.setIdentifier('container')
+        .setFileName('data.tsv')
         .setMargins(50, 50, 50, 50)
         .setDimensions(500, 1200)
         .setDefaultcolor("#ffffff")
@@ -18,6 +19,7 @@ function main() {
 
     var heatmap2 = Heatmap();
     heatmap2.setIdentifier('container2')
+        .setFileName('data2.tsv')
         .setMargins(100, 100, 100, 100)
         .setDimensions(250, 600)
         .setDefaultcolor("#CCCCCC")

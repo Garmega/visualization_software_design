@@ -116,7 +116,7 @@ window.Heatmap = (function() {
                   .attr("y", heatmap.canvasHeight + heatmap.margin.top)
                   .attr("width", heatmap.gridSize * 2)
                   .attr("height", heatmap.gridSize / 2)
-                  .style("fill", function(d, i) { return colors[i]; });
+                  .style("fill", function(d, i) { return heatmap.colors[i]; });
 
                 legend.append("text")
                   .attr("class", "mono")

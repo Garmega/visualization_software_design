@@ -50,25 +50,25 @@ window.Heatmap = (function() {
                 .domain(['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24'])
                 .rangeBands([0, this.chartWidth])
 
-            var dayLabels = canvasSvg.selectAll(".dayLabel")
-                .data(this.yDataLabels)
-                .enter().append("text")
-                  .text(function (d) { return d; })
-                  .attr("x", 0)
-                  .attr("y", function (d, i) { return i * this.gridSize; })
-                  .style("text-anchor", "end")
-                  .attr("transform", "translate(-6," + this.gridSize / 1.5 + ")")
-                  .attr("class", function (d, i) { return ((i >= 0 && i <= 4) ? "dayLabel mono axis axis-workweek" : "dayLabel mono axis"); });
-
-            var timeLabels = canvasSvg.selectAll(".timeLabel")
-                .data(this.xDataLabels)
-                .enter().append("text")
-                  .text(function(d) { return d; })
-                  .attr("x", function(d, i) { return i * this.gridSize; })
-                  .attr("y", 0)
-                  .style("text-anchor", "middle")
-                  .attr("transform", "translate(" + this.gridSize / 2 + ", -6)")
-                  .attr("class", function(d, i) { return ((i >= 7 && i <= 16) ? "timeLabel mono axis axis-worktime" : "timeLabel mono axis"); });
+            // var dayLabels = canvasSvg.selectAll(".dayLabel")
+            //     .data(this.yDataLabels)
+            //     .enter().append("text")
+            //       .text(function (d) { return d; })
+            //       .attr("x", 0)
+            //       .attr("y", function (d, i) { return i * this.gridSize; })
+            //       .style("text-anchor", "end")
+            //       .attr("transform", "translate(-6," + this.gridSize / 1.5 + ")")
+            //       .attr("class", function (d, i) { return ((i >= 0 && i <= 4) ? "dayLabel mono axis axis-workweek" : "dayLabel mono axis"); });
+            //
+            // var timeLabels = canvasSvg.selectAll(".timeLabel")
+            //     .data(this.xDataLabels)
+            //     .enter().append("text")
+            //       .text(function(d) { return d; })
+            //       .attr("x", function(d, i) { return i * this.gridSize; })
+            //       .attr("y", 0)
+            //       .style("text-anchor", "middle")
+            //       .attr("transform", "translate(" + this.gridSize / 2 + ", -6)")
+            //       .attr("class", function(d, i) { return ((i >= 7 && i <= 16) ? "timeLabel mono axis axis-worktime" : "timeLabel mono axis"); });
 
 
             d3.tsv('data.tsv', function(error, data) {

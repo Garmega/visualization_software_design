@@ -84,12 +84,10 @@ window.Heatmap = (function() {
 
                 rects.attr('y', function(d) { return (d.day - 1) * heatmap.gridSize; })
                     .attr('x', function(d) { return (d.hour - 1) * heatmap.gridSize; })
-                    .attr("rx", 5)
-                    .attr("ry", 5)
                     .attr('height', heatmap.gridSize)
                     .attr('width', heatmap.gridSize)
                     .style("fill", heatmap.defaultColor)
-                    .attr('class', 'bordered');
+                    .attr('class', 'bordered rounded');
 
                 rects.transition().duration(1000)
                     .delay(function(d) { return d.day * 100 } )

@@ -17,7 +17,7 @@ function main() {
         .build();
 
     var heatmap2 = Heatmap();
-    heatmap.setIdentifier('container2')
+    heatmap2.setIdentifier('container2')
         .setMargins(100, 100, 100, 100)
         .setDimensions(250, 600)
         .setDefaultcolor("#CCCCCC")
@@ -25,4 +25,5 @@ function main() {
         .build();
 
     console.log(heatmap);
+    console.log(heatmap2);
 }

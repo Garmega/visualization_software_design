@@ -51,8 +51,6 @@ window.Heatmap = (function() {
             //Creates chart and moves it accordingly
             var chartG = canvasSvg.append('g')
                 .attr('transform', 'translate(' + heatmap.margin.left + ',' + heatmap.margin.top + ')')
-                // .attr('height', this.chartHeight)
-                // .attr('width', this.chartWidth);
 
             var dayLabels = canvasSvg.selectAll(".dayLabel")
                 .data(heatmap.yDataLabels)
@@ -115,7 +113,7 @@ window.Heatmap = (function() {
 
                 legend.append("rect")
                   .attr("x", function(d, i) { return (heatmap.gridSize * i * 2) + heatmap.margin.left; })
-                  .attr("y", heatmap.chartHeight + heatmap.margin.top)
+                  .attr("y", heatmap.yDataLabels.length * heatmap.gridSize + heatmap.margin.top)
                   .attr("width", heatmap.gridSize * 2)
                   .attr("height", heatmap.gridSize / 2)
                   .style("fill", function(d, i) { return heatmap.colors[i]; });
@@ -124,7 +122,7 @@ window.Heatmap = (function() {
                   .attr("class", "mono")
                   .text(function(d) { return "≥ " + Math.round(d); })
                   .attr("x", function(d, i) { return (heatmap.gridSize * i * 2) + heatmap.margin.left; })
-                  .attr("y", heatmap.chartHeight + heatmap.margin.top + 5);
+                  .attr("y", heatmap.yDataLabels.length * heatmap.gridSize + heatmap.margin.top + heatmap.gridSize / 2);
             })
 
             return this;

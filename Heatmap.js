@@ -55,7 +55,7 @@ window.Heatmap = (function() {
                 .enter().append("text")
                   .text(function (d) { return d; })
                   .attr("x", 0)
-                  .attr("y", function (d, i) { return i * this.gridSize })
+                  .attr("y", function (d, i) { return console.log(this.gridSize); i * this.gridSize; })
                   .style("text-anchor", "end")
                   .attr("transform", "translate(-6," + this.gridSize / 1.5 + ")")
                   .attr("class", function (d, i) { return ((i >= 0 && i <= 4) ? "dayLabel mono axis axis-workweek" : "dayLabel mono axis"); });

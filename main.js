@@ -4,7 +4,7 @@ $(document).ready(function() {
 
 function main() {
     var heatmap = Heatmap();
-    heatmap.setIdentifier('#chart1')
+    heatmap.setSelector('#chart1')
         .setFileName('data.tsv')
         .setFieldNames('hour', 'day', 'value')
         .setYLabels(["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"])
@@ -13,7 +13,7 @@ function main() {
         .build();
 
     var heatmap2 = Heatmap();
-    heatmap2.setIdentifier('#chart2')
+    heatmap2.setSelector('#chart2')
         .setFileName('data3.tsv')
         .setFieldNames('hour', 'day', 'value')
         .setYLabels(["Mo", "Tu", "We", "Th", "Fr"])

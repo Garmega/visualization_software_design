@@ -22,7 +22,7 @@ window.Heatmap = (function() {
         /*
         User defined;
         */
-        heatmap.canvasIdentifier;
+        heatmap.canvasSelector;
         heatmap.fileName;
         heatmap.yDataLabels;
         heatmap.xDataLabels;
@@ -44,7 +44,7 @@ window.Heatmap = (function() {
             this.finalCalculations();
 
             //Creates canvas and size accordingly
-            var canvasSvg = d3.selectAll(heatmap.chartIdentifier)
+            var canvasSvg = d3.selectAll(heatmap.canvasSelector)
             //var canvasSvg = d3.selectAll('#container')
                 .append('svg')
                 .attr('height', heatmap.canvasHeight)
@@ -148,21 +148,21 @@ window.Heatmap = (function() {
 
         /*
         REQUIRED
-        Sets the y labels at the top of the chart
-        @params: An array of strings to label with
-        */
-        heatmap.setYLabels = function(yLabels) {
-            this.yDataLabels = yLabels;
-            return this;
-        }
-
-        /*
-        REQUIRED
         Sets the x labels at the top of the chart
         @params: An array of strings to label with
         */
         heatmap.setXLabels = function(xLabels) {
             this.xDataLabels = xLabels;
+            return this;
+        }
+
+        /*
+        REQUIRED
+        Sets the y labels at the top of the chart
+        @params: An array of strings to label with
+        */
+        heatmap.setYLabels = function(yLabels) {
+            this.yDataLabels = yLabels;
             return this;
         }
 
@@ -181,8 +181,8 @@ window.Heatmap = (function() {
         Sets the identifier of the element to which to draw the chart in
         @params: A string selector corresponding to the element wanted
         */
-        heatmap.setIdentifier = function(identifier) {
-            this.chartIdentifier = identifier;
+        heatmap.setSelector = function(selector) {
+            this.canvasSelector = selector;
             return this;
         }
         /*

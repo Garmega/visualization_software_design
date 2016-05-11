@@ -81,10 +81,13 @@ window.Heatmap = (function() {
 
                 rects.enter().append('rect')
 
-                rects.attr('y', function(d) { return yScale(d.day) })
-                    .attr('x', function(d) { return xScale(d.hour) })
-                    .attr('height', 50)
-                    .attr('width', 50)
+                rects.attr('y', function(d) { return (d.day - 1) * heatmap.gridSize; })
+                    .attr('x', function(d) { return (d.hour - 1) * heatmap.gridSize; })
+                    .attr("rx", 4)
+                    .attr("ry", 4)
+                    .attr('height', heatmap.gridSize)
+                    .attr('width', heatmap.gridSize)
+                    .attr("class", "bordered")
                     .style("fill", heatmap.colors[0]);
 
                 rects.transition().duration(1000)

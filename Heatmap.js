@@ -58,7 +58,7 @@ window.Heatmap = (function() {
                   .attr("y", function (d, i) { return (i * heatmap.gridSize) + heatmap.margin.top })
                   .style("text-anchor", "end")
                   .attr("transform", "translate(-6," + heatmap.gridSize / 1.5 + ")")
-                  .attr("class", function (d, i) { return ((i >= 0 && i <= 4) ? "dayLabel mono axis axis-workweek" : "dayLabel mono axis"); });
+                  //.attr("class", function (d, i) { return ((i >= 0 && i <= 4) ? "dayLabel mono axis axis-workweek" : "dayLabel mono axis"); });
 
             var timeLabels = canvasSvg.selectAll(".timeLabel")
                 .data(heatmap.xDataLabels)
@@ -68,7 +68,7 @@ window.Heatmap = (function() {
                   .attr("y", heatmap.margin.top)
                   .style("text-anchor", "middle")
                   .attr("transform", "translate(" + heatmap.gridSize / 2 + ", -6)")
-                  .attr("class", function(d, i) { return ((i >= 7 && i <= 16) ? "timeLabel mono axis axis-worktime" : "timeLabel mono axis"); });
+                  //.attr("class", function(d, i) { return ((i >= 7 && i <= 16) ? "timeLabel mono axis axis-worktime" : "timeLabel mono axis"); });
 
 
             d3.tsv('data.tsv', function(error, data) {

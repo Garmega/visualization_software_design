@@ -59,9 +59,6 @@ window.Heatmap = (function() {
                   .attr("x", heatmap.margin.left)
                   .attr("y", function (d, i) { return (i * heatmap.gridSize) + heatmap.margin.top })
                   .style("text-anchor", "end")
-                  .style("font-size", "9pt")
-                  .style("font-family", "Consolas, courier")
-                  .style("fill", "#aaa")
                   .attr("transform", "translate(-6," + heatmap.gridSize / 1.5 + ")")
                   .attr("class", "mono axis");
 
@@ -72,9 +69,6 @@ window.Heatmap = (function() {
                   .attr("x", function(d, i) { return (i * heatmap.gridSize) + heatmap.margin.left; })
                   .attr("y", heatmap.margin.top)
                   .style("text-anchor", "middle")
-                  .style("font-size", "9pt")
-                  .style("font-family", "Consolas, courier")
-                  .style("fill", "#aaa")
                   .attr("transform", "translate(" + heatmap.gridSize / 2 + ", -6)")
                   .attr("class", "mono axis");
 
@@ -95,8 +89,7 @@ window.Heatmap = (function() {
                     .attr('height', heatmap.gridSize)
                     .attr('width', heatmap.gridSize)
                     .style("fill", heatmap.defaultColor)
-                    .style("stroke", "#E6E6E6")
-                    .style("stroke-width", "2px");
+                    .attr('class', 'bordered');
 
                 rects.transition().duration(1000)
                     .delay(function(d) { return d.day * 100 } )
@@ -116,18 +109,13 @@ window.Heatmap = (function() {
                   .attr("width", heatmap.gridSize * 2)
                   .attr("height", heatmap.gridSize / 2)
                   .style("fill", function(d, i) { return heatmap.colors[i]; })
-                  .style("stroke", "#E6E6E6")
-                  .style("stroke-width", "2px");
+                  .attr('class', 'bordered');
 
                 legend.append("text")
                   .attr("class", "mono")
                   .text(function(d) { return "≥ " + Math.round(d); })
                   .attr("x", function(d, i) { return (heatmap.gridSize * i * 2) + heatmap.margin.left; })
                   .attr("y", heatmap.chartHeight + heatmap.margin.top + heatmap.gridSize * 1.5)
-                  .style("text-anchor", "middle")
-                  .style("font-size", "9pt")
-                  .style("font-family", "Consolas, courier")
-                  .style("fill", "#aaa");
             })
 
             return this;

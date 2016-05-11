@@ -9,7 +9,7 @@ $(document).ready(function() {
 function main() {
     var heatmap = Heatmap();
 
-    heatmap.setIdentifier('chart1')
+    heatmap.setIdentifier('#chart1')
         .setFileName('data.tsv')
         .setMargins(50, 50, 50, 50)
         .setDimensions(500, 1200)
@@ -18,7 +18,7 @@ function main() {
         .build();
 
     var heatmap2 = Heatmap();
-    heatmap2.setIdentifier('chart2')
+    heatmap2.setIdentifier('#chart2')
         .setFileName('data2.tsv')
         .setMargins(100, 100, 100, 100)
         .setDimensions(250, 600)

@@ -190,7 +190,7 @@ window.Heatmap = (function() {
         Sets the dimensions for the whole size of the canvas
         @params: Two integers to dictate height and width of the chart
         */
-        heatmap.setDimensions = function(height, width) {
+        heatmap.setDimensions = function(width, height) {
             this.canvasWidth = width;
             this.canvasHeight = height;
 

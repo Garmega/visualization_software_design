@@ -17,7 +17,7 @@ function main() {
         .setYLabels(["Mo", "Tu", "We", "Th", "Fr"])
         .setXLabels(["7a", "8a", "9a", "10a", "11a", "12a", "1p", "2p", "3p", "4p", "5p", "6p", "7p"])
         .setMargins(100, 100, 100, 100)
-        .setDimensions(350, 600)
+        .setDimensions(350, 700)
         .setDefaultcolor("#CCCCCC")
         .setColors(["#C1102B", "#C5BFBC", "#CAF1E7", "#5CC9CB", "#2E707B"])
         .build();

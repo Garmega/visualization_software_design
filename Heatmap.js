@@ -15,6 +15,9 @@ window.Heatmap = (function() {
 
         heatmap.defaultColor = "#ffffff";
         heatmap.colors = ["#ffffd9","#edf8b1","#c7e9b4","#7fcdbb","#41b6c4","#1d91c0","#225ea8","#253494","#081d58"];
+        heatmap.xDataFieldName = "x";
+        heatmap.yDataFieldName = "y";
+        heatmap.valueDataFieldName = "value";
 
         /*
         User defined;
@@ -41,7 +44,6 @@ window.Heatmap = (function() {
             this.finalCalculations();
 
             //Creates canvas and size accordingly
-            console.log(heatmap.chartIdentifier);
             var canvasSvg = d3.selectAll(heatmap.chartIdentifier)
             //var canvasSvg = d3.selectAll('#container')
                 .append('svg')
@@ -52,6 +54,7 @@ window.Heatmap = (function() {
             var chartG = canvasSvg.append('g')
                 .attr('transform', 'translate(' + heatmap.margin.left + ',' + heatmap.margin.top + ')')
 
+            //Makes labels for the day axis
             var dayLabels = canvasSvg.selectAll(".dayLabel")
                 .data(heatmap.yDataLabels)
                 .enter().append("text")
@@ -62,6 +65,7 @@ window.Heatmap = (function() {
                   .attr("transform", "translate(-6," + heatmap.gridSize / 1.5 + ")")
                   .attr("class", "mono axis");
 
+            //Makes labels for the hour axis
             var timeLabels = canvasSvg.selectAll(".timeLabel")
                 .data(heatmap.xDataLabels)
                 .enter().append("text")
@@ -74,16 +78,17 @@ window.Heatmap = (function() {
 
             d3.tsv(heatmap.fileName, function(error, data) {
                 var colorScale = d3.scale.quantile()
-                    .domain([0, heatmap.colors.length - 1, d3.max(data, function(d) {return +d.value;})])
+                    .domain([0, heatmap.colors.length - 1, d3.max(data, function(d) {return +d[valueDataFieldName];})])
                     .range(heatmap.colors);
 
+                //Creates the rectangles with the actual data in it
                 var rects = chartG.selectAll('.rect')
                     .data(data)
 
                 rects.enter().append('rect')
 
-                rects.attr('y', function(d) { return (d.day - 1) * heatmap.gridSize; })
-                    .attr('x', function(d) { return (d.hour - 1) * heatmap.gridSize; })
+                rects.attr('y', function(d) { return (d[heatmap.yDataFieldName] - 1) * heatmap.gridSize; })
+                    .attr('x', function(d) { return (d[heatmap.xDataFieldName] - 1) * heatmap.gridSize; })
                     .attr("rx", 5)
                     .attr("ry", 5)
                     .attr('height', heatmap.gridSize)
@@ -92,13 +97,12 @@ window.Heatmap = (function() {
                     .attr('class', 'bordered');
 
                 rects.transition().duration(1000)
-                    .delay(function(d) { return d.day * 100 } )
+                    .delay(function(d) { return d[heatmap.yDataFieldName] * 100 } )
                     .style("fill", function(d) { return colorScale(d.value); });
 
+                //Creates the legend for the colors
                 var legend = canvasSvg.selectAll(".legend")
                     .data([0].concat(colorScale.quantiles()), function(d) { return d; });
-
-                console.log(heatmap.chartHeight + " " + heatmap.margin.top);
 
                 legend.enter().append("g")
                     .attr("class", "legend");
@@ -134,7 +138,9 @@ window.Heatmap = (function() {
             //calculated using the width of the chart
             this.gridSize = Math.floor(this.chartWidth / this.xDataLabels.length);
 
-
+            //This is calculated after gridSize because
+            //We properly fit the chart horizontally but do not account for vertical
+            //space. So we must manually extrapolate this value after
             this.chartHeight = this.yDataLabels.length * this.gridSize;
 
             return this;
@@ -189,6 +195,18 @@ window.Heatmap = (function() {
             this.canvasHeight = height;
 
             return this;
+        }
+
+        /*
+        Sets the fields names of the data. If none is set defaults 'x' and 'y'
+        will be used
+        */
+        heatmap.setFieldNames = function(xDataFieldName, yDataFieldName, valueDataFieldName) {
+            this.xDataFieldName = xDataFieldName;
+            this.yDataFieldName = yDataFieldName;
+            this.valueDataFieldName = valueDataFieldName;
+
+            return this
         }
 
         /*

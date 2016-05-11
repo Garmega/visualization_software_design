@@ -3,10 +3,6 @@ rect.bordered {
     stroke-width : 2px;
 }
 
-rect.rounded {
-    border-radius: 5px;
-}
-
 text.mono {
     font-size : 9pt;
     font-family : Consolas, courier;

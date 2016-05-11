@@ -6,14 +6,16 @@ window.Heatmap = (function() {
         /*
         user defined data
         */
-        heatmap.yDataLabels = ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"];
-        heatmap.xDataLabels = ["1a", "2a", "3a", "4a", "5a", "6a", "7a", "8a", "9a", "10a", "11a", "12a", "1p", "2p", "3p", "4p", "5p", "6p", "7p", "8p", "9p", "10p", "11p", "12p"];
-        heatmap.colors;
-        heatmap.defaultColor;
+
+
 
         /*
         User defined dimensions
         */
+        heatmap.yDataLabels;
+        heatmap.xDataLabels;
+        heatmap.colors;
+        heatmap.defaultColor;
         heatmap.fileName;
         heatmap.canvasIdentifier;
         heatmap.margin;
@@ -90,6 +92,16 @@ window.Heatmap = (function() {
 
             })
 
+            return this;
+        }
+
+        heatmap.setYLabels = function(yLabels) {
+            this.yDataLabels = yLabels;
+            return this;
+        }
+
+        heatmap.setXLabels = function(xLabels) {
+            this.xDataLabels = xLabels;
             return this;
         }
 

@@ -13,7 +13,7 @@ function main() {
 
     var heatmap2 = Heatmap();
     heatmap2.setIdentifier('#chart2')
-        .setFileName('data2.tsv')
+        .setFileName('data3.tsv')
         .setYLabels(["Mo", "Tu", "We", "Th", "Fr"])
         .setXLabels(["7a", "8a", "9a", "10a", "11a", "12a", "1p", "2p", "3p", "4p", "5p", "6p", "7p"])
         .setMargins(100, 100, 100, 100)

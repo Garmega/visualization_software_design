@@ -73,7 +73,7 @@ window.Heatmap = (function() {
 
             d3.tsv('data.tsv', function(error, data) {
                 var colorScale = d3.scale.quantile()
-                    .domain([0, heatmap.colors.length - 1, d3.max(data, function(d) {return d.value;})])
+                    .domain([0, heatmap.colors.length - 1])
                     .range(heatmap.colors);
 
                 var rects = chartG.selectAll('.rect')
@@ -94,54 +94,6 @@ window.Heatmap = (function() {
                     .style("fill", function(d) { return colorScale(d.value); });
 
             })
-
-            // var xLabels = chartG.append('g')
-            //     .data(this.xDataLabels)
-            //     .enter().append('text')
-            //     .attr("x", function(d, i) { return i * this.gridSize; })
-            //     .attr("y", 0)
-            //     .attr("transform", "translate(" + this.gridSize / 2 + ", -6)")
-            //     .text(function(d) { return d; })
-            //     .style("text-anchor", "middle")
-            //     .attr("class", function(d, i) { return ((i >= 7 && i <= 16) ? "timeLabel mono axis axis-worktime" : "timeLabel mono axis"); });
-            //
-            // var yLabels = chartG.append('g')
-            //     .data(this.yDataLabels)
-            //     .enter().append('text')
-            //     .text(function(d) { return d; })
-            //     .style('text-anchor', 'middle')
-            //     .attr('transform', "translate(-6," + this.gridSize / 1.5 + ")")
-            //     .attr('x', 0)
-            //     .attr('y', function (d, i) { return i * this.gridSize; })
-            //     .attr('class', function (d, i) { return ((i >= 0 && i <= 4) ? 'dayLabel mono axis axis-workweek' : 'dayLabel mono axis'); });
-
-            // var heatmapChart = function(file) {
-            //     d3.tsv(file,
-            //     function(d) {
-            //         return {
-            //             day: +d.day,
-            //             hour: +d.hour,
-            //             value: +d.value
-            //         };
-            //     },
-            //     function(error, data) {
-                    // var colorScale = d3.scale.quantile()
-                    //     .domain([0, heatmap.colors.length - 1, d3.max(data, function(d) {return d.value;})])
-                    //     .range(heatmap.colors);
-            //
-            //         var cards = heatmap.chartG.append('rect')
-            //             .attr("x", function(d) { return (d.hour - 1) * heatmap.gridSize; })
-            //             .attr("y", function(d) { return (d.day - 1) * heatmap.gridSize; })
-            //             .attr("rx", 4)
-            //             .attr("ry", 4)
-            //             .attr("class", "hour bordered")
-            //             .attr("width", heatmap.gridSize)
-            //             .attr("height", heatmap.gridSize)
-            //             .style("fill", heatmap.colors[0]);
-            //     })
-            // }
-            //
-            // heatmapChart('data.tsv')
 
             return this;
         }

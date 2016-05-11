@@ -78,7 +78,7 @@ window.Heatmap = (function() {
 
             d3.tsv(heatmap.fileName, function(error, data) {
                 var colorScale = d3.scale.quantile()
-                    .domain([0, heatmap.colors.length - 1, d3.max(data, function(d) {return +d[valueDataFieldName];})])
+                    .domain([0, heatmap.colors.length - 1, d3.max(data, function(d) {return +d[heatmap.valueDataFieldName];})])
                     .range(heatmap.colors);
 
                 //Creates the rectangles with the actual data in it

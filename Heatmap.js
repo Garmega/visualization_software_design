@@ -54,26 +54,29 @@ window.Heatmap = (function() {
                 // .attr('height', this.chartHeight)
                 // .attr('width', this.chartWidth);
 
-            var dayLabels = canvasSvg.selectAll(".dayLabel")
-                .data(heatmap.yDataLabels)
+            var dayLabels = canvasSvg.data(heatmap.yDataLabels)
                 .enter().append("text")
                   .text(function (d) { return d; })
                   .attr("x", heatmap.margin.left)
                   .attr("y", function (d, i) { return (i * heatmap.gridSize) + heatmap.margin.top })
                   .style("text-anchor", "end")
+                  .style("font-size", "9pt")
+                  .style("font-family" "Consolas, courier")
+                  .style("fill" : "#aaa");
                   .attr("transform", "translate(-6," + heatmap.gridSize / 1.5 + ")")
-                  .attr("class", "dayLabel mono axis");
+                  .attr("class", "mono axis");
 
-            var timeLabels = canvasSvg.selectAll(".timeLabel")
-                .data(heatmap.xDataLabels)
+            var timeLabels = canvasSvg.data(heatmap.xDataLabels)
                 .enter().append("text")
                   .text(function(d) { return d; })
                   .attr("x", function(d, i) { return (i * heatmap.gridSize) + heatmap.margin.left; })
                   .attr("y", heatmap.margin.top)
                   .style("text-anchor", "middle")
+                  .style("font-size", "9pt")
+                  .style("font-family" "Consolas, courier")
+                  .style("fill" : "#aaa");
                   .attr("transform", "translate(" + heatmap.gridSize / 2 + ", -6)")
-                  .attr("class", "timeLabel mono axis");
-
+                  .attr("class", "mono axis");
 
             d3.tsv(heatmap.fileName, function(error, data) {
                 var colorScale = d3.scale.quantile()
@@ -93,6 +96,8 @@ window.Heatmap = (function() {
                     .attr('width', heatmap.gridSize)
                     .attr("class", "bordered")
                     .style("fill", heatmap.defaultColor);
+                    .style("stroke", "#E6E6E6")
+                    .style("stroke-width", "2px");
 
                 rects.transition().duration(1000)
                     .delay(function(d) { return d.day * 100 } )

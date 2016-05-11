@@ -29,35 +29,35 @@ window.Heatmap = (function() {
             this.finalCalculations();
 
             //Creates canvas and size accordingly
-            console.log(this.chartIdentifier);
+            console.log(heatmap.chartIdentifier);
             // var canvasSvg = d3.selectAll(this.chartIdentifier)
             var canvasSvg = d3.selectAll('#container')
                 .append('svg')
-                .attr('height', this.canvasHeight)
-                .attr('width', this.canvasWidth);
+                .attr('height', heatmap.canvasHeight)
+                .attr('width', heatmap.canvasWidth);
 
             //Creates chart and moves it accordingly
             var chartG = canvasSvg.append('g')
-                .attr('transform', 'translate(' + this.margin.left + ',' + this.margin.top + ')')
+                .attr('transform', 'translate(' + heatmap.margin.left + ',' + heatmap.margin.top + ')')
                 // .attr('height', this.chartHeight)
                 // .attr('width', this.chartWidth);
 
             var yScale = d3.scale.ordinal()
                 .domain(['1', '2', '3', '4', '5', '6', '7'])
-                .rangeBands([0, this.chartHeight]);
+                .rangeBands([0, heatmap.chartHeight]);
 
             var xScale = d3.scale.ordinal()
                 .domain(['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24'])
-                .rangeBands([0, this.chartWidth])
+                .rangeBands([0, heatmap.chartWidth])
 
             var dayLabels = canvasSvg.selectAll(".dayLabel")
                 .data(this.yDataLabels)
                 .enter().append("text")
                   .text(function (d) { return d; })
-                  .attr("x", 0)
-                  .attr("y", function (d, i) { return i * heatmap.gridSize })
+                  .attr("x", heatmap.margin.left)
+                  .attr("y", function (d, i) { return (i * heatmap.gridSize) + heatmap.margin.top })
                   .style("text-anchor", "end")
-                  .attr("transform", "translate(-6," + this.gridSize / 1.5 + ")")
+                  .attr("transform", "translate(-6," + heatmap.gridSize / 1.5 + ")")
                   .attr("class", function (d, i) { return ((i >= 0 && i <= 4) ? "dayLabel mono axis axis-workweek" : "dayLabel mono axis"); });
             //
             // var timeLabels = canvasSvg.selectAll(".timeLabel")

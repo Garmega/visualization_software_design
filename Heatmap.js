@@ -8,7 +8,7 @@ window.Heatmap = (function() {
         */
         heatmap.yDataLabels = ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"];
         heatmap.xDataLabels = ["1a", "2a", "3a", "4a", "5a", "6a", "7a", "8a", "9a", "10a", "11a", "12a", "1p", "2p", "3p", "4p", "5p", "6p", "7p", "8p", "9p", "10p", "11p", "12p"];
-        heatmap.colorScale;
+        heatmap.colors;
         heatmap.defaultColor;
 
         /*
@@ -66,7 +66,7 @@ window.Heatmap = (function() {
 
             d3.tsv('data.tsv', function(error, data) {
                 var colorScale = d3.scale.quantile()
-                    .domain([0, heatmap.colorScale.length - 1, d3.max(data, function(d) {return +d.value;})])
+                    .domain([0, heatmap.colors.length - 1, d3.max(data, function(d) {return +d.value;})])
                     .range(heatmap.colors);
 
                 var rects = chartG.selectAll('.rect')
@@ -102,8 +102,8 @@ window.Heatmap = (function() {
             return this;
         }
 
-        heatmap.setColorScale = function(colorScale) {
-            this.colorScale = colorScale;
+        heatmap.setColors = function(colors) {
+            this.colors = colors;
             return this;
         }
 

@@ -3,11 +3,8 @@ window.Heatmap = (function() {
     var h = function() {
         var heatmap = {};
 
-
-
-
         /*
-        User defined dimensions
+        Defaults
         */
         heatmap.margin = {
             left: 50,
@@ -15,15 +12,17 @@ window.Heatmap = (function() {
             top: 50,
             right: 50
         };
-        
+
         heatmap.defaultColor = "#ffffff";
         heatmap.colors = ["#ffffd9","#edf8b1","#c7e9b4","#7fcdbb","#41b6c4","#1d91c0","#225ea8","#253494","#081d58"];
 
+        /*
+        User defined;
+        */
+        heatmap.canvasIdentifier;
+        heatmap.fileName;
         heatmap.yDataLabels;
         heatmap.xDataLabels;
-        heatmap.fileName;
-        heatmap.canvasIdentifier;
-
         heatmap.canvasHeight;
         heatmap.canvasWidth;
 
@@ -34,6 +33,10 @@ window.Heatmap = (function() {
         heatmap.chartWidth;
         heatmap.gridSize;
 
+        /*
+        Call only after satisfied with all other values.
+        This will build the chart based on the set values and then show it on screen
+        */
         heatmap.build = function() {
             this.finalCalculations();
 
@@ -100,58 +103,10 @@ window.Heatmap = (function() {
             return this;
         }
 
-        heatmap.setYLabels = function(yLabels) {
-            this.yDataLabels = yLabels;
-            return this;
-        }
-
-        heatmap.setXLabels = function(xLabels) {
-            this.xDataLabels = xLabels;
-            return this;
-        }
-
-        heatmap.setFileName = function(fileName) {
-            this.fileName = fileName;
-            return this;
-        }
-
-        heatmap.setIdentifier = function(identifier) {
-            this.chartIdentifier = identifier;
-            return this;
-        }
-
-        heatmap.setDefaultcolor = function(defaultColor) {
-            this.defaultColor = defaultColor;
-            return this;
-        }
-
-        heatmap.setColors = function(colors) {
-            this.colors = colors;
-            return this;
-        }
-
-        //Sets the margins for the chart
-        heatmap.setMargins = function(left, bottom, top, right) {
-            this.margin = {
-                left: left,
-                bottom: bottom,
-                top: top,
-                right: right
-            }
-
-            return this;
-        }
-
-        //Sets the dimensions for the whole size of the canvas
-        heatmap.setDimensions = function(height, width) {
-            this.canvasWidth = width;
-            this.canvasHeight = height;
-
-            return this;
-        }
-
-        //Private method that is internally called after the user has
-        //set all the parameters they need.
+        /*
+        Private method that is internally called after the user has
+        set all the parameters they need.
+        */
         heatmap.finalCalculations = function() {
             //Chart size is dependant on canvas size and margins set.
             this.chartHeight = this.canvasHeight - this.margin.bottom - this.margin.top;
@@ -161,6 +116,93 @@ window.Heatmap = (function() {
             //Determines how wide/tall each grid block would be.
             //calculated using the width of the chart
             this.gridSize = Math.floor(this.chartWidth / this.xDataLabels.length);
+
+            return this;
+        }
+
+        /*
+        REQUIRED
+        Sets the y labels at the top of the chart
+        @params: An array of strings to label with
+        */
+        heatmap.setYLabels = function(yLabels) {
+            this.yDataLabels = yLabels;
+            return this;
+        }
+
+        /*
+        REQUIRED
+        Sets the x labels at the top of the chart
+        @params: An array of strings to label with
+        */
+        heatmap.setXLabels = function(xLabels) {
+            this.xDataLabels = xLabels;
+            return this;
+        }
+
+        /*
+        REQUIRED
+        Sets the name of the file to grab data from
+        @params: A string that matches the file name
+        */
+        heatmap.setFileName = function(fileName) {
+            this.fileName = fileName;
+            return this;
+        }
+
+        /*
+        REQUIRED
+        Sets the identifier of the element to which to draw the chart in
+        @params: A string selector corresponding to the element wanted
+        */
+        heatmap.setIdentifier = function(identifier) {
+            this.chartIdentifier = identifier;
+            return this;
+        }
+        /*
+        REQUIRED
+        Sets the dimensions for the whole size of the canvas
+        @params: Two integers to dictate height and width of the chart
+        */
+        heatmap.setDimensions = function(height, width) {
+            this.canvasWidth = width;
+            this.canvasHeight = height;
+
+            return this;
+        }
+
+        /*
+        Sets the defaultcolor of the cells before filled in
+        Only really shows before data is loaded
+        @params: A string hex value to set the color to
+        */
+        heatmap.setDefaultcolor = function(defaultColor) {
+            this.defaultColor = defaultColor;
+            return this;
+        }
+
+        /*
+        Sets the color scale for the cells to be filled in with
+        NOTE: This also determines how many quantiles to cut the data values into
+        @params: An array of string hex values to set the scale to
+        */
+        heatmap.setColors = function(colors) {
+            this.colors = colors;
+            return this;
+        }
+
+        /*
+        Sets the margins for the chart
+        @params: 4 integers for the left, bottom, top and right margin values
+        */
+        //Sets the margins for the chart
+        heatmap.setMargins = function(left, bottom, top, right) {
+            this.margin = {
+                left: left,
+                bottom: bottom,
+                top: top,
+                right: right
+            }
 
             return this;
         }

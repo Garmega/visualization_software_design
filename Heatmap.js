@@ -91,6 +91,7 @@ window.Heatmap = (function() {
                     .style("fill", heatmap.colors[0]);
 
                 rects.transition().duration(1000)
+                    .delay(function(d) { return d.day * 100 } )
                     .style("fill", function(d) { return colorScale(d.value); });
 
             })

@@ -112,8 +112,8 @@ window.Heatmap = (function() {
                     .attr("class", "legend");
 
                 legend.append("rect")
-                  .attr("x", function(d, i) { return heatmap.gridSize * i; })
-                  .attr("y", heatmap.canvasHeight + heatmap.margin.top)
+                  .attr("x", function(d, i) { return (heatmap.gridSize * i * 2) + heatmap.margin.left; })
+                  .attr("y", heatmap.chartHeight + heatmap.margin.top)
                   .attr("width", heatmap.gridSize * 2)
                   .attr("height", heatmap.gridSize / 2)
                   .style("fill", function(d, i) { return heatmap.colors[i]; });
@@ -121,8 +121,8 @@ window.Heatmap = (function() {
                 legend.append("text")
                   .attr("class", "mono")
                   .text(function(d) { return "≥ " + Math.round(d); })
-                  .attr("x", function(d, i) { return heatmap.gridSize * i; })
-                  .attr("y", heatmap.canvasHeight + heatmap.margin.top + 5);
+                  .attr("x", function(d, i) { return (heatmap.gridSize * i * 2) + heatmap.margin.left; })
+                  .attr("y", heatmap.chartHeight + heatmap.margin.top + 5);
             })
 
             return this;

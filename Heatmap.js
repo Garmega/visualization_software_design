@@ -27,9 +27,9 @@ window.Heatmap = (function() {
 
         heatmap.build = function() {
             this.finalCalculations();
-            console.log(this.gridSize);
 
             //Creates canvas and size accordingly
+            console.log(this.chartIdentifier);
             // var canvasSvg = d3.selectAll(this.chartIdentifier)
             var canvasSvg = d3.selectAll('#container')
                 .append('svg')
@@ -39,16 +39,36 @@ window.Heatmap = (function() {
             //Creates chart and moves it accordingly
             var chartG = canvasSvg.append('g')
                 .attr('transform', 'translate(' + this.margin.left + ',' + this.margin.top + ')')
-                .attr('height', this.chartHeight)
-                .attr('width', this.chartWidth);
+                // .attr('height', this.chartHeight)
+                // .attr('width', this.chartWidth);
 
-            // var yScale = d3.scale.ordinal()
-            //     .domain(['1', '2', '3', '4', '5', '6', '7'])
-            //     .rangeBands([0, this.chartHeight]);
-            //
-            // var xScale = d3.scale.ordinal()
-            //     .domain(['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24'])
-            //     .rangeBands([0, this.chartWidth])
+            var yScale = d3.scale.ordinal()
+                .domain(['1', '2', '3', '4', '5', '6', '7'])
+                .rangeBands([0, this.chartHeight]);
+
+            var xScale = d3.scale.ordinal()
+                .domain(['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24'])
+                .rangeBands([0, this.chartWidth])
+
+            var dayLabels = canvasSvg.selectAll(".dayLabel")
+                .data(this.yDataLabels)
+                .enter().append("text")
+                  .text(function (d) { return d; })
+                  .attr("x", 0)
+                  .attr("y", function (d, i) { return i * this.gridSize; })
+                  .style("text-anchor", "end")
+                  .attr("transform", "translate(-6," + this.gridSize / 1.5 + ")")
+                  .attr("class", function (d, i) { return ((i >= 0 && i <= 4) ? "dayLabel mono axis axis-workweek" : "dayLabel mono axis"); });
+
+            var timeLabels = canvasSvg.selectAll(".timeLabel")
+                .data(this.xDataLabels)
+                .enter().append("text")
+                  .text(function(d) { return d; })
+                  .attr("x", function(d, i) { return i * this.gridSize; })
+                  .attr("y", 0)
+                  .style("text-anchor", "middle")
+                  .attr("transform", "translate(" + this.gridSize / 2 + ", -6)")
+                  .attr("class", function(d, i) { return ((i >= 7 && i <= 16) ? "timeLabel mono axis axis-worktime" : "timeLabel mono axis"); });
 
 
             d3.tsv('data.tsv', function(error, data) {
@@ -61,17 +81,15 @@ window.Heatmap = (function() {
 
                 rects.enter().append('rect')
 
-                rects.attr('y', function(d) { return (d.day - 1) * heatmap.gridSize; })
-                    .attr('x', function(d) { return (d.hour - 1) * heatmap.gridSize; })
-                    .attr("rx", 4)
-                    .attr("ry", 4)
-                    .attr('height', heatmap.gridSize)
-                    .attr('width', heatmap.gridSize)
-                    .attr("class", "bordered")
+                rects.attr('y', function(d) { return yScale(d.day) })
+                    .attr('x', function(d) { return xScale(d.hour) })
+                    .attr('height', 50)
+                    .attr('width', 50)
                     .style("fill", heatmap.colors[0]);
 
                 rects.transition().duration(1000)
                     .style("fill", function(d) { return colorScale(d.value); });
+
             })
 
             // var xLabels = chartG.append('g')

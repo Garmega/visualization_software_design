@@ -105,7 +105,7 @@ window.Heatmap = (function() {
                     .delay(function(d) { return d.day * 100 } )
                     .style("fill", function(d) { return colorScale(d.value); });
 
-                var legend = heatmap.canvasSvg.selectAll(".legend")
+                var legend = canvasSvg.selectAll(".legend")
                     .data([0].concat(heatmap.colorScale.quantiles()), function(d) { return d; });
 
                 legend.enter().append("g")

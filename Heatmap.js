@@ -113,7 +113,7 @@ window.Heatmap = (function() {
 
                 legend.append("rect")
                   .attr("x", function(d, i) { return (heatmap.gridSize * i * 2) + heatmap.margin.left; })
-                  .attr("y", heatmap.yDataLabels.length * heatmap.gridSize + heatmap.margin.top)
+                  .attr("y", heatmap.chartHeight + heatmap.margin.top + heatmap.gridSize / 2)
                   .attr("width", heatmap.gridSize * 2)
                   .attr("height", heatmap.gridSize / 2)
                   .style("fill", function(d, i) { return heatmap.colors[i]; });
@@ -122,7 +122,7 @@ window.Heatmap = (function() {
                   .attr("class", "mono")
                   .text(function(d) { return "≥ " + Math.round(d); })
                   .attr("x", function(d, i) { return (heatmap.gridSize * i * 2) + heatmap.margin.left; })
-                  .attr("y", heatmap.yDataLabels.length * heatmap.gridSize + heatmap.margin.top + heatmap.gridSize / 2);
+                  .attr("y", heatmap.chartHeight + heatmap.margin.top + heatmap.gridSize * 2);
             })
 
             return this;
@@ -134,13 +134,15 @@ window.Heatmap = (function() {
         */
         heatmap.finalCalculations = function() {
             //Chart size is dependant on canvas size and margins set.
-            this.chartHeight = this.canvasHeight - this.margin.bottom - this.margin.top;
             this.chartWidth = this.canvasWidth - this.margin.left - this.margin.right;
 
             //Dependant on the length of xaxislabels and the width of the chart.
             //Determines how wide/tall each grid block would be.
             //calculated using the width of the chart
             this.gridSize = Math.floor(this.chartWidth / this.xDataLabels.length);
+
+
+            this.chartHeight = this.yDataLabels.length * this.gridSize;
 
             return this;
         }

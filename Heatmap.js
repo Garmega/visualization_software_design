@@ -62,7 +62,7 @@ window.Heatmap = (function() {
                   .style("text-anchor", "end")
                   .style("font-size", "9pt")
                   .style("font-family", "Consolas, courier")
-                  .style("fill", "#aaa");
+                  .style("fill", "#aaa")
                   .attr("transform", "translate(-6," + heatmap.gridSize / 1.5 + ")")
                   .attr("class", "mono axis");
 
@@ -74,7 +74,7 @@ window.Heatmap = (function() {
                   .style("text-anchor", "middle")
                   .style("font-size", "9pt")
                   .style("font-family", "Consolas, courier")
-                  .style("fill", "#aaa");
+                  .style("fill", "#aaa")
                   .attr("transform", "translate(" + heatmap.gridSize / 2 + ", -6)")
                   .attr("class", "mono axis");
 

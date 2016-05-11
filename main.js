@@ -21,4 +21,7 @@ function main() {
         .setDefaultcolor("#CCCCCC")
         .setColors(["#C1102B", "#C5BFBC", "#CAF1E7", "#5CC9CB", "#2E707B"])
         .build();
+
+    console.log(heatmap)
+    console.log(heatmap2)
 }

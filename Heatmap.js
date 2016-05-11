@@ -92,8 +92,8 @@ window.Heatmap = (function() {
 
                 rects.attr('y', function(d) { return (d.day - 1) * heatmap.gridSize; })
                     .attr('x', function(d) { return (d.hour - 1) * heatmap.gridSize; })
-                    .attr("rx", 4)
-                    .attr("ry", 4)
+                    .attr("rx", 5)
+                    .attr("ry", 5)
                     .attr('height', heatmap.gridSize)
                     .attr('width', heatmap.gridSize)
                     .attr("class", "bordered")
@@ -107,6 +107,8 @@ window.Heatmap = (function() {
 
                 var legend = canvasSvg.selectAll(".legend")
                     .data([0].concat(colorScale.quantiles()), function(d) { return d; });
+
+                console.log(heatmap.chartHeight + " " + heatmap.margin.top);
 
                 legend.enter().append("g")
                     .attr("class", "legend");

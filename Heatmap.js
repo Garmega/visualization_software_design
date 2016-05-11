@@ -54,7 +54,8 @@ window.Heatmap = (function() {
                 // .attr('height', this.chartHeight)
                 // .attr('width', this.chartWidth);
 
-            var dayLabels = canvasSvg.data(heatmap.yDataLabels)
+            var dayLabels = canvasSvg.selectAll(".dayLabel")
+                .data(heatmap.yDataLabels)
                 .enter().append("text")
                   .text(function (d) { return d; })
                   .attr("x", heatmap.margin.left)
@@ -66,7 +67,8 @@ window.Heatmap = (function() {
                   .attr("transform", "translate(-6," + heatmap.gridSize / 1.5 + ")")
                   .attr("class", "mono axis");
 
-            var timeLabels = canvasSvg.data(heatmap.xDataLabels)
+            var timeLabels = canvasSvg.selectAll(".timeLabel")
+                .data(heatmap.xDataLabels)
                 .enter().append("text")
                   .text(function(d) { return d; })
                   .attr("x", function(d, i) { return (i * heatmap.gridSize) + heatmap.margin.left; })
